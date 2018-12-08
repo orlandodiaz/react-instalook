@@ -2,14 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import crypto from "crypto";
 import NavBar from "./components/navbar/NavBar";
-import SearchBar from "./components/seachbar/SearchBar";
-import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
-import theme from "./components/navbar/theme";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Demo from "./components/ImageGrid/ImageGrid";
-import { Grid, Paper } from "@material-ui/core";
-import MyButton from "./components/Button";
-// import Button from "@material-ui/core/Button";
+import { MuiThemeProvider } from "@material-ui/core/styles/";
 
 class App extends Component {
   state = {
@@ -84,39 +77,13 @@ class App extends Component {
     console.log(this.getRhxGis());
   };
 
-  doSomething = event => {
-    // alert("sdds");
-    // console.log("sdsdd");
-    // event.preventDefault();
-  };
-
   render() {
     return (
-      <div>
-        <CssBaseline />
-
-        <MuiThemeProvider theme={theme}>
-          <div>
-            <NavBar />
-            <SearchBar />
-            <MyButton
-              variant="contained"
-              color="secondary"
-              onClick={this.doSomething}
-            >
-              Secondary
-            </MyButton>
-
-            <Grid container alignContent="space-around">
-              {/*{this.state.my_array.map(item => <li key={item.id}>{item}</li>)}*/}
-
-              <Grid item sm>
-                <Demo title="Hey my title" description="Hey my description" />
-              </Grid>
-            </Grid>
-          </div>
-        </MuiThemeProvider>
-      </div>
+      <MuiThemeProvider>
+        <div>
+          <NavBar />
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
