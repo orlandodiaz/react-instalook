@@ -20,11 +20,10 @@ class GridContainer extends Component {
   };
   render() {
     console.log(this.props.users.users.length);
-    if (this.props.users.users.length === 0) return "List is empty";
+    if (this.props.users.users.length === 0) return null;
     else
       return (
         <div>
-          <p>aaaaaa</p>
           <Grid container alignContent="space-around">
             {this.props.users.users.map(user => (
               <Grid item sm>

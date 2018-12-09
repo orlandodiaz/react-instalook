@@ -8,7 +8,7 @@ import MyButton from "../components/Button";
 
 // define component container here
 
-class MyContainer extends Component {
+class ButtonContainer extends Component {
   doSomething = event => {
     // alert("ok");
     // console.log("sdsdd");
@@ -40,4 +40,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   actionCreators
-)(MyContainer);
+)(ButtonContainer);

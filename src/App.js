@@ -7,7 +7,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Demo from "./components/ImageGrid/ImageGrid";
 import { Grid, Paper } from "@material-ui/core";
 import MyButton from "./components/Button";
-import Container from "./containers/myContainer";
+import ButtonContainer from "./containers/buttonContainer";
 import GridContainer from "./containers/gridContainer";
 import SearchContainer from "./containers/searchContainer";
 
@@ -21,7 +21,7 @@ class App extends Component {
             <NavBar />
             <SearchContainer />
             {/*<SearchBar />*/}
-            <Container />
+            {/*<ButtonContainer />*/}
             <GridContainer />
           </div>
         </MuiThemeProvider>

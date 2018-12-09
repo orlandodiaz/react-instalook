@@ -7,6 +7,11 @@ import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/es/styles/withStyles";
 import MenuIcon from "@material-ui/icons/Menu";
 // import IconButton from "@material-uai/core/IconButton/IconButton";
+
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+
 import Drawer from "../Drawer";
 const styles = {
   root: {
@@ -21,6 +26,14 @@ const styles = {
   }
 };
 
+const sideList = (
+  <List component="nav">
+    <ListItem button>
+      <ListItemText primary="Trash" />
+    </ListItem>
+  </List>
+);
+
 function NavBar(props) {
   const { classes } = props;
   return (
@@ -30,15 +43,16 @@ function NavBar(props) {
           className={classes.menuButton}
           color="inherit"
           aria-label="Menu"
+          onClick={() => alert("hi")}
         >
           <MenuIcon />
         </IconButton>
         <Typography variant="title" color="inherit">
           Instagram Profile Search
         </Typography>
-        <Typography variant="h6" color="inherit">
-          About
-        </Typography>
+        {/*<Typography variant="h6" color="inherit">*/}
+        {/*About*/}
+        {/*</Typography>*/}
       </Toolbar>
     </AppBar>
   );
