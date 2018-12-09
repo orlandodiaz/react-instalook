@@ -23,7 +23,10 @@ const styles = {
 };
 
 function MediaCard(props) {
+  console.log(props);
   const { classes } = props;
+  console.log(props);
+  console.log(props.fullname);
   return (
     <Card className={classes.card}>
       <CardActionArea>
@@ -34,9 +37,9 @@ function MediaCard(props) {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Username
+            {props.username}
           </Typography>
-          <Typography component="p">Full name</Typography>
+          <Typography component="p">{props.fullname}</Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>

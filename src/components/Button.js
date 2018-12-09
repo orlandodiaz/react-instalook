@@ -7,9 +7,10 @@ class MyButton extends Component {
       <Button
         variant="contained"
         color="secondary"
-        onClick={this.props.onClick}
+        // onClick={this.props.onClick}
+        onClick={this.props.handleClick}
       >
-        Secondary
+        Fire an action
       </Button>
     );
   }

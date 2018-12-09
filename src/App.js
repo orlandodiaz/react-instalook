@@ -9,6 +9,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Demo from "./components/ImageGrid/ImageGrid";
 import { Grid, Paper } from "@material-ui/core";
 import MyButton from "./components/Button";
+import Container from "./containers/myContainer";
+import GridContainer from "./containers/gridContainer";
 // import Button from "@material-ui/core/Button";
 
 class App extends Component {
@@ -84,12 +86,6 @@ class App extends Component {
     console.log(this.getRhxGis());
   };
 
-  doSomething = event => {
-    // alert("sdds");
-    // console.log("sdsdd");
-    // event.preventDefault();
-  };
-
   render() {
     return (
       <div>
@@ -99,21 +95,8 @@ class App extends Component {
           <div>
             <NavBar />
             <SearchBar />
-            <MyButton
-              variant="contained"
-              color="secondary"
-              onClick={this.doSomething}
-            >
-              Secondary
-            </MyButton>
-
-            <Grid container alignContent="space-around">
-              {/*{this.state.my_array.map(item => <li key={item.id}>{item}</li>)}*/}
-
-              <Grid item sm>
-                <Demo title="Hey my title" description="Hey my description" />
-              </Grid>
-            </Grid>
+            <Container />
+            <GridContainer />
           </div>
         </MuiThemeProvider>
       </div>
