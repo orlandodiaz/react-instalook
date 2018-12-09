@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
-import crypto from "crypto";
 import NavBar from "./components/navbar/NavBar";
 import SearchBar from "./components/seachbar/SearchBar";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
@@ -11,90 +9,18 @@ import { Grid, Paper } from "@material-ui/core";
 import MyButton from "./components/Button";
 import Container from "./containers/myContainer";
 import GridContainer from "./containers/gridContainer";
-// import Button from "@material-ui/core/Button";
+import SearchContainer from "./containers/searchContainer";
 
 class App extends Component {
-  state = {
-    username: "Mike",
-    biography: "Mike is a tennis player from Idaho",
-    full_name: "Mike The mike",
-    profile_picture_url: null,
-    follower_count: null,
-    following_count: null
-  };
-
-  async getRhxGis() {
-    var rx = '("rhx_gis"):"([a-zA-Z0-9]*)';
-
-    try {
-      var resp = await axios.get("https://www.instagram.com/");
-    } catch (e) {
-      console.log(e);
-    }
-    console.log(resp.data);
-    var match = resp.data.match(rx); //=> object
-    console.log(match[2]);
-    console.log(this.generateSignature(match[2], `/${this.state.username}/`));
-    var signature = this.generateSignature(
-      match[2],
-      `/${this.state.username}/`
-    );
-
-    axios({
-      url: `https://cors-anywhere.herokuapp.com/https://www.instagram.com/${
-        this.state.username
-      }/?__a=1`,
-      method: "get",
-      headers: {
-        "x-instagram-gis": signature,
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => {
-        console.log(response);
-        var data = response.data.graphql.user;
-        this.setState({
-          username: data.biography,
-          full_name: data.full_name,
-          profile_pic_url: data.profile_pic_url,
-          follower_count: data.edge_follow.count,
-          following_count: data.edge_followed_by.count
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
-  generateSignature(rhxGis, queryVariables) {
-    // generate signature
-
-    return crypto
-      .createHash("md5")
-      .update(`${rhxGis}:${queryVariables}`, "utf8")
-      .digest("hex");
-  }
-
-  // fetchUserInformation() {
-  //
-  //   resp = await axios.get('
-  // }
-
-  updateUsername = event => {
-    console.log(event);
-    this.setState({ username: this.refs.username_field.value });
-    console.log(this.getRhxGis());
-  };
-
   render() {
     return (
       <div>
         <CssBaseline />
-
         <MuiThemeProvider theme={theme}>
           <div>
             <NavBar />
-            <SearchBar />
+            <SearchContainer />
+            {/*<SearchBar />*/}
             <Container />
             <GridContainer />
           </div>

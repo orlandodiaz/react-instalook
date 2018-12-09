@@ -8,7 +8,8 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-
+import logo from "../../images/verified.png";
+import red from "@material-ui/core/es/colors/red";
 const styles = {
   card: {
     maxWidth: 345,
@@ -32,23 +33,49 @@ function MediaCard(props) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="https://scontent-dfw5-1.cdninstagram.com/vp/b807ff73fe6dad51cdc998311250fab7/5CA36664/t51.2885-15/e35/43455395_309623072978612_1370372047968037407_n.jpg?_nc_ht=scontent-dfw5-1.cdninstagram.com"
+          image={props.profilepic}
           title="Contemplative Reptile"
         />
+        {/*<img src="/public/verified.png" alt="" />*/}
+
+        {/*Test{" "}*/}
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="h2"
+            style={{ minWidth: 180 }}
+          >
+            {props.isVerified ? <img src={logo} height="16" /> : "oops"}
+
             {props.username}
           </Typography>
+
+          <Typography
+            variant="subtitle2"
+            component="p"
+            gutterBottom
+            color="primary"
+          >
+            {props.byLine}
+          </Typography>
+
           <Typography component="p">{props.fullname}</Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Share
+        <Button
+          size="small"
+          color="primary"
+          href={props.profileUrl}
+          target="_blank"
+        >
+          Profile
         </Button>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
+
+        {/*<Button size="small" color="primary">*/}
+        {/*Learn More*/}
+        {/*</Button>*/}
       </CardActions>
     </Card>
   );

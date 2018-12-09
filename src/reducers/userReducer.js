@@ -1,7 +1,7 @@
 const initState = {
-  users: [],
-  username: "defaultname",
-  fullname: "default_fullname"
+  users: []
+  // username: "defaultname",
+  // fullname: "default_fullname"
 };
 
 const userReducer = (state = initState, action) => {

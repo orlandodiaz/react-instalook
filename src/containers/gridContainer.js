@@ -19,28 +19,39 @@ class GridContainer extends Component {
     // event.preventDefault();
   };
   render() {
-    return (
-      <Grid container alignContent="space-around">
-        {/*{this.state.my_array.map(item => <li key={item.id}>{item}</li>)}*/}
-        {/*this.props.username: {this.props.username}*/}
-        <Grid item sm>
-          <ImageCard
-            username={this.props.user.username}
-            fullname={this.props.user.fullname}
-            title="Hey my title"
-            description="Hey my description"
-          />
-        </Grid>
-      </Grid>
-    );
+    console.log(this.props.users.users.length);
+    if (this.props.users.users.length === 0) return "List is empty";
+    else
+      return (
+        <div>
+          <p>aaaaaa</p>
+          <Grid container alignContent="space-around">
+            {this.props.users.users.map(user => (
+              <Grid item sm>
+                <ImageCard
+                  username={user.user.username}
+                  fullname={user.user.full_name}
+                  profilepic={user.user.profile_pic_url}
+                  isVerified={user.user.is_verified}
+                  profileUrl={`http://instagram.com/${user.user.username}`}
+                  byLine={user.user.byline}
+                  title="Hey my title"
+                  description="Hey my description"
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </div>
+      );
   }
 }
 
 // Parentheses are to automatically return this object. Otherwise you would use return
 const mapStateToProps = state => {
-  console.log(state.username);
+  // console.log("State:");
+  // console.log(state);
   return {
-    user: state
+    users: state
   };
 };
 

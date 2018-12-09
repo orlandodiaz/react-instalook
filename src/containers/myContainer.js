@@ -10,14 +10,14 @@ import MyButton from "../components/Button";
 
 class MyContainer extends Component {
   doSomething = event => {
-    // console.log(this.props);
-    alert("test");
+    // alert("ok");
     // console.log("sdsdd");
     // event.preventDefault();
+    // this.props.getUsers(document.querySelector(#.target.text);
   };
   render() {
     return (
-      <MyButton handleClick={this.props.getUsers} />
+      <MyButton handleClick={this.doSomething} />
       // <Button variant="contained" color="secondary" onClick={this.props.users}>
       //   Fire an action
       // </Button>
