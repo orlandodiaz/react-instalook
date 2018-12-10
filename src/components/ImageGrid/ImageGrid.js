@@ -44,9 +44,9 @@ function MediaCard(props) {
             gutterBottom
             variant="h5"
             component="h2"
-            style={{ minWidth: 180 }}
+            style={{ minWidth: 200 }}
           >
-            {props.isVerified ? <img src={logo} height="16" /> : "oops"}
+            {props.isVerified ? <img src={logo} height="16" /> : ""}
 
             {props.username}
           </Typography>

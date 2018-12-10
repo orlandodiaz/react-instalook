@@ -10,6 +10,7 @@ import MyButton from "./components/Button";
 import ButtonContainer from "./containers/buttonContainer";
 import GridContainer from "./containers/gridContainer";
 import SearchContainer from "./containers/searchContainer";
+import Body from "./components/Body";
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
             {/*<SearchBar />*/}
             {/*<ButtonContainer />*/}
             <GridContainer />
+            {/*<Body />*/}
           </div>
         </MuiThemeProvider>
       </div>

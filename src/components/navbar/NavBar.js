@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -12,7 +12,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 
-import Drawer from "../Drawer";
+import Drawer from "@material-ui/core/Drawer";
 const styles = {
   root: {
     flexGrow: 1
@@ -23,39 +23,92 @@ const styles = {
   menuButton: {
     marginLeft: -12,
     marginRight: 20
+  },
+
+  list: {
+    width: 250
+  },
+  fullList: {
+    width: "auto"
   }
 };
 
-const sideList = (
-  <List component="nav">
-    <ListItem button>
-      <ListItemText primary="Trash" />
-    </ListItem>
-  </List>
-);
+// const { classes } = this.props;
 
-function NavBar(props) {
-  const { classes } = props;
-  return (
-    <AppBar position="static">
-      <Toolbar>
-        <IconButton
-          className={classes.menuButton}
-          color="inherit"
-          aria-label="Menu"
-          onClick={() => alert("hi")}
+class NavBar extends Component {
+  state = {
+    top: false,
+    left: false,
+    bottom: false,
+    right: false
+  };
+
+  toggleDrawer = (side, open) => () => {
+    this.setState({
+      [side]: open
+    });
+  };
+
+  render() {
+    const { classes } = this.props;
+
+    this.sideList = (
+      <div className={classes.list}>
+        <List component="nav">
+          <ListItem button>
+            <ListItemText primary="Home" />
+          </ListItem>
+          <ListItem button>
+            <ListItemText primary="About" />
+          </ListItem>
+          <ListItem button>
+            <ListItemText primary="Contact" />
+          </ListItem>
+          <ListItem button>
+            <ListItemText primary="Privacy statement" />
+          </ListItem>
+          <ListItem button>
+            <ListItemText primary="Terms of Use" />
+          </ListItem>
+        </List>
+      </div>
+    );
+
+    return (
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="Menu"
+            onClick={this.toggleDrawer("left", true)}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="title" color="inherit">
+            Instagram Profile Search
+          </Typography>
+          {/*<Typography variant="h6" color="inherit">*/}
+          {/*About*/}
+          {/*</Typography>*/}
+        </Toolbar>
+
+        <Drawer
+          open={this.state.left}
+          onClose={this.toggleDrawer("left", false)}
         >
-          <MenuIcon />
-        </IconButton>
-        <Typography variant="title" color="inherit">
-          Instagram Profile Search
-        </Typography>
-        {/*<Typography variant="h6" color="inherit">*/}
-        {/*About*/}
-        {/*</Typography>*/}
-      </Toolbar>
-    </AppBar>
-  );
+          <div
+            tabIndex={0}
+            role="button"
+            onClick={this.toggleDrawer("left", false)}
+            onKeyDown={this.toggleDrawer("left", false)}
+          >
+            {this.sideList}
+          </div>
+        </Drawer>
+      </AppBar>
+    );
+  }
 }
 // export default NavBar;
 //
