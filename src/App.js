@@ -10,24 +10,24 @@ import MyButton from "./components/Button";
 import ButtonContainer from "./containers/buttonContainer";
 import GridContainer from "./containers/gridContainer";
 import SearchContainer from "./containers/searchContainer";
-import Body from "./components/Body";
+import PrivacyPage from "./components/PrivacyPage";
+
+import About from "./components/About";
+import { Router, Route, browserHistory, IndexRoute } from "react-router";
+import Root from "./components/Root";
+import SearchPage from "./components/SearchPage";
+import Privacypage from "./components/PrivacyPage";
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <CssBaseline />
-        <MuiThemeProvider theme={theme}>
-          <div>
-            <NavBar />
-            <SearchContainer />
-            {/*<SearchBar />*/}
-            {/*<ButtonContainer />*/}
-            <GridContainer />
-            {/*<Body />*/}
-          </div>
-        </MuiThemeProvider>
-      </div>
+      <Router history={browserHistory}>
+        <Route path={"/"} component={Root}>
+          <IndexRoute component={SearchPage} />
+          <Route path={"about"} component={About} />
+          <Route path={"privacy"} component={PrivacyPage} />
+        </Route>
+      </Router>
     );
   }
 }

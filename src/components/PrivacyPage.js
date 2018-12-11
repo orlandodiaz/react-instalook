@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 
-class Body extends Component {
+class PrivacyPage extends Component {
   render() {
     return (
       <div>
@@ -70,4 +70,4 @@ class Body extends Component {
   }
 }
 
-export default Body;
+export default PrivacyPage;

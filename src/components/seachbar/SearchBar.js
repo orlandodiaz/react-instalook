@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import { debounce } from "lodash";
 import withStyles from "@material-ui/core/es/styles/withStyles";
-
 // const SearchBar = () => <TextField fullWidth={true} />;
 
 const styles = theme => ({

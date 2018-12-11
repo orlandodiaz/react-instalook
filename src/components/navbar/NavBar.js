@@ -13,6 +13,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 
 import Drawer from "@material-ui/core/Drawer";
+import { browserHistory } from "react-router";
 const styles = {
   root: {
     flexGrow: 1
@@ -56,10 +57,16 @@ class NavBar extends Component {
       <div className={classes.list}>
         <List component="nav">
           <ListItem button>
-            <ListItemText primary="Home" />
+            <ListItemText
+              primary="Home"
+              onClick={() => browserHistory.push("/")}
+            />
           </ListItem>
           <ListItem button>
-            <ListItemText primary="About" />
+            <ListItemText
+              primary="About"
+              onClick={() => browserHistory.push("/about")}
+            />
           </ListItem>
           <ListItem button>
             <ListItemText primary="Contact" />
