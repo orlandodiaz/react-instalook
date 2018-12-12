@@ -23,10 +23,15 @@ import * as ReactDOM from "react-dom";
 const styles = theme => ({
   root: {
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    width: 800,
+    margin: "0 auto"
+    // top: 400
+
+    // top: "400px"
   },
   formControl: {
-    margin: theme.spacing.unit,
+    // margin: theme.spacing.unit,
     minWidth: 120,
     marginTop: 30
   },
@@ -61,8 +66,10 @@ class SearchContainer extends Component {
     // alert(this.state.sortby);
     // this.setState({ sortby: event.target.value });
     // this.props.dispatch("SORT_USERS_ARRAY");
-    this.props.sortUsers();
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({ [event.target.name]: event.target.value }, () => {
+      console.log("this.state.sortby", this.state.sortby);
+      this.props.sortUsers(this.state.sortby);
+    });
   };
   doSomething = event => {
     // alert("ok");
@@ -70,7 +77,11 @@ class SearchContainer extends Component {
     // event.preventDefault();
     // console.log("event");
     // console.log(event.target.value);
+
     this.props.getUsers(event.target.value);
+    event.target.style.fontSize = "50%";
+    // event.target.style.fontSize = "50%";
+
     // this.changeSearch();
     // this.props.getUsers(document.querySelector(#.target.text);
   };
@@ -132,7 +143,7 @@ class SearchContainer extends Component {
 // Parentheses are to automatically return this object. Otherwise you would use return
 const mapStateToProps = state => {
   return {
-    users: state.users
+    users: state.users.users
   };
 };
 

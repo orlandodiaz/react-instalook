@@ -24,10 +24,10 @@ const styles = {
 };
 
 function MediaCard(props) {
-  console.log(props);
+  // console.log(props);
   const { classes } = props;
-  console.log(props);
-  console.log(props.fullname);
+  // console.log(props);
+  // console.log(props.fullname);
   return (
     <Card className={classes.card}>
       <CardActionArea>

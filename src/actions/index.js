@@ -15,13 +15,16 @@ export const updateSearchField = value => {
 //     sort_type: `type`
 //   };
 // };
-export function sortUsers() {
+export function sortUsers(sortby) {
   return (dispatch, getState) => {
     const state = getState();
 
+    console.log("Disaptching. Value of sortby is:");
+    console.log(sortby);
     dispatch({
       type: "SORT_USERS",
-      payload: sortBy(state.users, obj => obj.user.follower_count).reverse()
+      payload: sortBy(state.users, obj => obj.user.follower_count).reverse(),
+      sortby: sortby
     });
   };
 }
@@ -35,11 +38,24 @@ export function getUsers(username) {
         `https://www.instagram.com/web/search/topsearch/?context=blended&query=${username}&include_reel=true`
       )
       .then(response => {
-        let users = { users: response.data.users };
+        // let users = { users: response.data.users };
+        // if (state.sortby === "followers") {
+        //   dispatch({
+        //     type: "FETCH_USERS",
+        //     // payload: users
+        //     payload: {
+        //       users: sortBy(
+        //         response.data.users,
+        //         obj => obj.response.data.user.follower_count
+        //       ).reverse()
+        //     }
+        //   });
+        // }
+
         dispatch({
           type: "FETCH_USERS",
-          payload: users
-          // payload: { users: users, sortby: state.sortby }
+          // payload: users
+          payload: { users: response.data.users, sortby: state.sortby }
         });
       })
       .catch(error => {

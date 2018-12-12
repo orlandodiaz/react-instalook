@@ -10,13 +10,13 @@ const styles = theme => ({
     // fontSize: 30,
     lineHeight: 2.4,
     paddingLeft: 20,
-    width: 800,
+    width: 600,
     marginTtop: 0,
     marginBottom: 0,
     marginLeft: "auto",
     marginRight: "auto",
 
-    fontSize: "200%"
+    fontSize: "300%"
   }
 });
 
