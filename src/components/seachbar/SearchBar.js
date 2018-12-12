@@ -3,7 +3,10 @@ import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import { debounce } from "lodash";
 import withStyles from "@material-ui/core/es/styles/withStyles";
+import { withTheme } from "@material-ui/core/styles";
+
 // const SearchBar = () => <TextField fullWidth={true} />;
+// const { primary, secondary } = props.theme.palette.text;
 
 const styles = theme => ({
   TheInput: {
@@ -15,11 +18,12 @@ const styles = theme => ({
     marginBottom: 0,
     marginLeft: "auto",
     marginRight: "auto",
-
+    // color: theme.palette.primary.main,
     fontSize: "300%"
+    // underline: "#333333"
+    // borderBottom: theme.palette.primary.main
   }
 });
-
 class SearchBar extends Component {
   changeSearch = debounce(this.props.handleChange, 200);
 
@@ -30,6 +34,9 @@ class SearchBar extends Component {
 
   render() {
     const { classes } = this.props;
+    const { theme } = this.props;
+    const { primary, secondary } = theme.palette.text;
+
     return (
       <div>
         <TextField
@@ -38,6 +45,7 @@ class SearchBar extends Component {
           placeholder="Enter username"
           onChange={this.onTextChange}
           spellCheck={false}
+          // underlineFocusStyle={{ borderColor: theme.palette.error }}
           // style={{ margin: 20, fontSize: "300%" }}
           // inputStyle={this.styles.textField}
           // InputClassName={classes.TheInput}
@@ -58,6 +66,6 @@ class SearchBar extends Component {
 
 // TheForm = withStyles(styles)(SearchBar);
 
-export default withStyles(styles)(SearchBar);
+export default withStyles(styles, { withTheme: true })(SearchBar);
 
 // export default SearchBar;

@@ -72,7 +72,10 @@ class NavBar extends Component {
             <ListItemText primary="Contact" />
           </ListItem>
           <ListItem button>
-            <ListItemText primary="Privacy statement" />
+            <ListItemText
+              primary="Privacy statement"
+              onClick={() => browserHistory.push("/privacy")}
+            />
           </ListItem>
           <ListItem button>
             <ListItemText primary="Terms of Use" />

@@ -24,8 +24,9 @@ const styles = theme => ({
   root: {
     display: "flex",
     flexWrap: "wrap",
-    width: 800,
-    margin: "0 auto"
+    width: "100%",
+    justifyContent: "center",
+    justifyItems: "center"
     // top: 400
 
     // top: "400px"
@@ -33,7 +34,8 @@ const styles = theme => ({
   formControl: {
     // margin: theme.spacing.unit,
     minWidth: 120,
-    marginTop: 30
+    marginTop: 30,
+    marginLeft: 10
   },
   selectEmpty: {
     marginTop: theme.spacing.unit * 2
@@ -58,10 +60,6 @@ class SearchContainer extends Component {
     });
   }
 
-  handleDropdownChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
   handleChange = event => {
     // alert(this.state.sortby);
     // this.setState({ sortby: event.target.value });
@@ -80,6 +78,7 @@ class SearchContainer extends Component {
 
     this.props.getUsers(event.target.value);
     event.target.style.fontSize = "50%";
+
     // event.target.style.fontSize = "50%";
 
     // this.changeSearch();
