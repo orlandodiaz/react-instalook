@@ -1,7 +1,8 @@
 import { sortBy } from "underscore";
 
 const initState = {
-  users: []
+  users: [],
+  sortby: "none"
 };
 
 const userReducer = (state = initState, action) => {
@@ -9,8 +10,14 @@ const userReducer = (state = initState, action) => {
   switch (action.type) {
     case "FETCH_USERS":
       return action.payload;
-    case "SORT_USERS_ARRAY":
-      return sortBy(action.payload, obj => obj.user.follower_count).reverse();
+    // return sortBy(action.payload, obj => obj.user.follower_count).reverse();
+    case "SORT_USERS":
+      // let users;
+      let users = {
+        users: sortBy(action.payload, obj => obj.user.follower_count).reverse(),
+        sortby: "followers"
+      };
+      return users;
 
     default:
       return state;
