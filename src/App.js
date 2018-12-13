@@ -7,7 +7,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Demo from "./components/ImageGrid/ImageGrid";
 import { Grid, Paper } from "@material-ui/core";
 import MyButton from "./components/Button";
-import ButtonContainer from "./containers/buttonContainer";
 import GridContainer from "./containers/gridContainer";
 import SearchContainer from "./containers/searchContainer";
 import PrivacyPage from "./components/PrivacyPage";

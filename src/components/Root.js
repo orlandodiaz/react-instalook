@@ -7,8 +7,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Demo from "./ImageGrid/ImageGrid";
 import { Grid, Paper } from "@material-ui/core";
 import MyButton from "./Button";
-import ButtonContainer from "../containers/buttonContainer";
-
 // import Body from "./components/Body";
 
 class Root extends Component {
