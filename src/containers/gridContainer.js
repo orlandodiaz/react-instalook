@@ -50,7 +50,7 @@ const mapStateToProps = state => {
   // console.log("State:");
   // console.log(state);
   return {
-    users: state
+    users: state.users
   };
 };
 
