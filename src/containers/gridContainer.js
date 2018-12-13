@@ -3,20 +3,23 @@ import { connect } from "react-redux";
 import * as actionCreators from "../actions/index.js";
 import { Grid, Paper } from "@material-ui/core";
 import ImageCard from "../components/ImageCard/ImageCard";
-
-import getUsers from "../actions/";
-import App from "../App";
-import Button from "@material-ui/core/Button/Button";
-import MyButton from "../components/Button";
-
+import UserDialogContainer from "./userDialogContainer";
+import * as actions from "../actions";
+// import UserDialogfrom "../components/Dialogs/userDialog";
+// import
 // define component container here
 
 class GridContainer extends Component {
-  doSomething = event => {
-    // console.log(this.props);
-    // alert("test");
-    // console.log("sdsdd");
-    // event.preventDefault();
+  state = {
+    open: false
+  };
+  doSomething = username => {
+    // alert("sdsd");
+    console.log("username:" + username);
+    this.props.getUserInfo(username);
+    this.props.showUserDialog();
+    // this.setState({ open: true });
+    // render(){<UserDialogContainer />);
   };
   render() {
     console.log(this.props.users.users.length);
@@ -28,6 +31,7 @@ class GridContainer extends Component {
             {this.props.users.users.map(user => (
               <Grid item sm>
                 <ImageCard
+                  key={user.user.pk}
                   username={user.user.username}
                   fullname={user.user.full_name}
                   profilepic={user.user.profile_pic_url}
@@ -36,11 +40,12 @@ class GridContainer extends Component {
                   byLine={user.user.byline}
                   title="Hey my title"
                   description="Hey my description"
-                  onButtonClick={this.doSomething}
+                  onLearnMoreClick={() => this.doSomething(user.user.username)}
                 />
               </Grid>
             ))}
           </Grid>
+          <UserDialogContainer />
         </div>
       );
   }
@@ -51,16 +56,20 @@ const mapStateToProps = state => {
   // console.log("State:");
   // console.log(state);
   return {
-    users: state.users
+    users: state.users,
+    ui: state.ui
   };
 };
 
-// // shortcut so you dont do store.dispatch
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     users: () => dispatch(getUsers)
-//   };
-// };
+// shortcut so you dont do store.dispatch
+const mapDispatchToProps = dispatch => {
+  return {
+    getUserInfo: () => dispatch(actions.getUserInfo()),
+    users: () => dispatch(actions.getUsers()),
+    showUserDialog: () => dispatch(actions.showUserDialog()),
+    closeUserDialog: () => dispatch(actions.closeUserDialog())
+  };
+};
 
 export default connect(
   mapStateToProps,

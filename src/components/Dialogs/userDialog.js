@@ -60,13 +60,16 @@ class UserDialog extends React.Component {
   };
 
   handleClickOpen = () => {
+    // this.props.users
     this.setState({
       open: true
     });
+    this.props.handleClickOpen();
   };
 
   handleClose = () => {
     this.setState({ open: false });
+    this.props.handleClose();
   };
 
   render() {
@@ -78,23 +81,17 @@ class UserDialog extends React.Component {
         <Dialog
           onClose={this.handleClose}
           aria-labelledby="customized-dialog-title"
-          open={this.state.open}
+          open={this.props.open}
         >
           <DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
-            Modal title
+            {this.props.username}
+            {/*{this.props.biography ? this.props.biography : ""}*/}
+            {/*{this.props.user.biography  Biography: this.props.user.biography & ""}*/}
           </DialogTitle>
           <DialogContent>
-            <Typography gutterBottom>{this.props.bio}</Typography>
-            <Typography gutterBottom>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur
-              et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
-              auctor.
-            </Typography>
-            <Typography gutterBottom>
-              Aenean lacinia bibendum nulla sed consectetur. Praesent commodo
-              cursus magna, vel scelerisque nisl consectetur et. Donec sed odio
-              dui. Donec ullamcorper nulla non metus auctor fringilla.
-            </Typography>
+            <Typography gutterBottom>{this.props.fullname}</Typography>
+            {/*<Typography gutterBottom>{this.props.fullname}</Typography>*/}
+            <Typography gutterBottom>{this.props.biography}</Typography>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">

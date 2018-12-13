@@ -10,6 +10,9 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import logo from "../../images/verified.png";
 import red from "@material-ui/core/es/colors/red";
+import UserDialog from "../Dialogs/userDialog";
+import UserDialogContainer from "../../containers/userDialogContainer";
+
 const styles = {
   card: {
     maxWidth: 345,
@@ -72,8 +75,8 @@ function MediaCard(props) {
         >
           Profile
         </Button>
-
-        <Button size="small" color="primary" onClick={props.onButtonClick}>
+        {/*<UserDialogContainer />*/}
+        <Button size="small" color="primary" onClick={props.onLearnMoreClick}>
           Learn More
         </Button>
       </CardActions>

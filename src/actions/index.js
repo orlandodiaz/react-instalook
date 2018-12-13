@@ -35,7 +35,11 @@ export function getUsers(username) {
         dispatch({
           type: "FETCH_USERS",
           // payload: users
-          payload: { users: response.data.users, sortby: state.sortby }
+          payload: {
+            users: response.data.users,
+            sortby: state.users.sortby,
+            fuck: "SDSD"
+          }
         });
       })
       .catch(error => {
@@ -61,10 +65,10 @@ export function getUserInfo(username) {
     } catch (e) {
       console.log(e);
     }
-    console.log(resp.data);
+    // console.log(resp.data);
     const match = resp.data.match(rx); //=> object
-    console.log(match[2]);
-    console.log(generateSignature(match[2], `/${username}/`));
+    // console.log(match[2]);
+    // console.log(generateSignature(match[2], `/${username}/`));
     const signature = generateSignature(match[2], `/${username}/`);
 
     axios({
@@ -76,12 +80,12 @@ export function getUserInfo(username) {
       }
     })
       .then(response => {
-        console.log("resp" + response);
-        alert(response);
+        // console.log("resp" + response);
+        // alert(response);
         dispatch({
           type: "GET_USER_INFO",
           // payload: users
-          userData: response.data.graphql
+          user: response.data.graphql
         });
       })
       .catch(err => {
@@ -97,4 +101,32 @@ function generateSignature(rhxGis, queryVariables) {
     .createHash("md5")
     .update(`${rhxGis}:${queryVariables}`, "utf8")
     .digest("hex");
+}
+
+// const showUserDialog = {
+//   type: "SHOW_USER_DIALOG",
+//   open: "true"
+// };
+//
+// const closeUserDialog = {
+//   type: "CLOSE_USER_DIALOG",
+//   open: "false"
+// };
+
+export function showUserDialog() {
+  return dispatch => {
+    dispatch({
+      type: "SHOW_USER_DIALOG",
+      open: true
+    });
+  };
+}
+
+export function closeUserDialog() {
+  return dispatch => {
+    dispatch({
+      type: "CLOSE_USER_DIALOG",
+      open: false
+    });
+  };
 }

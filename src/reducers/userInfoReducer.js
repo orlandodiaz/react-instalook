@@ -1,13 +1,13 @@
 import { sortBy } from "underscore";
 
 const initState = {
-  userData: {}
+  user: {}
 };
 
 const userInfoReducer = (state = initState, action) => {
   switch (action.type) {
     case "GET_USER_INFO":
-      return action.userData;
+      return action.user;
     default:
       return state;
   }
