@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../actions/index.js";
 import { Grid, Paper } from "@material-ui/core";
-import ImageCard from "../components/ImageGrid/ImageGrid";
+import ImageCard from "../components/ImageCard/ImageCard";
 
 import getUsers from "../actions/";
 import App from "../App";
@@ -14,7 +14,7 @@ import MyButton from "../components/Button";
 class GridContainer extends Component {
   doSomething = event => {
     // console.log(this.props);
-    alert("test");
+    // alert("test");
     // console.log("sdsdd");
     // event.preventDefault();
   };
@@ -36,6 +36,7 @@ class GridContainer extends Component {
                   byLine={user.user.byline}
                   title="Hey my title"
                   description="Hey my description"
+                  onButtonClick={this.doSomething}
                 />
               </Grid>
             ))}

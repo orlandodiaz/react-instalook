@@ -4,7 +4,7 @@ import SearchBar from "./components/seachbar/SearchBar";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import theme from "./components/navbar/theme";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Demo from "./components/ImageGrid/ImageGrid";
+import Demo from "./components/ImageCard/ImageCard";
 import { Grid, Paper } from "@material-ui/core";
 import MyButton from "./components/Button";
 import GridContainer from "./containers/gridContainer";

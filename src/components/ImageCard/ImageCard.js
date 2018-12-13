@@ -73,9 +73,9 @@ function MediaCard(props) {
           Profile
         </Button>
 
-        {/*<Button size="small" color="primary">*/}
-        {/*Learn More*/}
-        {/*</Button>*/}
+        <Button size="small" color="primary" onClick={props.onButtonClick}>
+          Learn More
+        </Button>
       </CardActions>
     </Card>
   );

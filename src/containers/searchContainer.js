@@ -1,13 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actionCreators from "../actions/index.js";
-import { Grid, Paper } from "@material-ui/core";
-import ImageCard from "../components/ImageGrid/ImageGrid";
-
 import * as actions from "../actions/";
-import App from "../App";
-import Button from "@material-ui/core/Button/Button";
-import MyButton from "../components/Button";
 import SearchBar from "../components/seachbar/SearchBar";
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import Select from "@material-ui/core/Select";
@@ -16,9 +9,6 @@ import OutlinedInput from "@material-ui/core/OutlinedInput/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel/InputLabel";
 import withStyles from "@material-ui/core/es/styles/withStyles";
 import * as ReactDOM from "react-dom";
-// import { debounce } from "lodash";
-
-// define component container here
 
 const styles = theme => ({
   root: {
@@ -27,9 +17,6 @@ const styles = theme => ({
     width: "100%",
     justifyContent: "center",
     justifyItems: "center"
-    // top: 400
-
-    // top: "400px"
   },
   formControl: {
     // margin: theme.spacing.unit,
@@ -140,11 +127,11 @@ class SearchContainer extends Component {
 }
 
 // Parentheses are to automatically return this object. Otherwise you would use return
-const mapStateToProps = state => {
-  return {
-    users: state.users.users
-  };
-};
+// const mapStateToProps = state => {
+//   return {
+//     users: state.users.users
+//   };
+// };
 
 // shortcut so you dont do store.dispatch
 const mapDispatchToProps = dispatch => {
@@ -154,8 +141,8 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  mapStateToProps,
-  actionCreators
+  null,
+  actions
 )(withStyles(styles)(SearchContainer));
 
 // export default connect()(SearchContainer);
