@@ -56,58 +56,94 @@ export function getUsers(username) {
 }
 
 export function getUserInfo(username) {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     // make async data here
     const state = getState();
 
-    const data = getRhxGis(username);
+    const resp = await axios.get("https://www.instagram.com/");
+    const rx = '("rhx_gis"):"([a-zA-Z0-9]*)';
 
-    dispatch({
-      type: "GET_USER_INFO",
-      // payload: users
-      userData: data
-    });
+    try {
+    } catch (e) {
+      console.log(e);
+    }
+    console.log(resp.data);
+    const match = resp.data.match(rx); //=> object
+    console.log(match[2]);
+    console.log(generateSignature(match[2], `/${username}/`));
+    const signature = generateSignature(match[2], `/${username}/`);
+
+    axios({
+      url: `https://cors-anywhere.herokuapp.com/https://www.instagram.com/${username}/?__a=1`,
+      method: "get",
+      headers: {
+        "x-instagram-gis": signature,
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => {
+        console.log("resp" + response);
+        alert(response);
+        // this.setState({
+        //   username: data.biography,
+        //   full_name: data.full_name,
+        //   profile_pic_url: data.profile_pic_url,
+        //   follower_count: data.edge_follow.count,
+        //   following_count: data.edge_followed_by.count
+        // });
+        dispatch({
+          type: "GET_USER_INFO",
+          // payload: users
+          userData: response.data.graphql
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    // });
+    // const data = "s";
+    // alert(data.data.graphql);
   };
 }
 
-async function getRhxGis(username) {
-  const resp = await axios.get("https://www.instagram.com/");
-  const rx = '("rhx_gis"):"([a-zA-Z0-9]*)';
-
-  try {
-  } catch (e) {
-    console.log(e);
-  }
-  console.log(resp.data);
-  const match = resp.data.match(rx); //=> object
-  console.log(match[2]);
-  console.log(generateSignature(match[2], `/${username}/`));
-  const signature = generateSignature(match[2], `/${username}/`);
-
-  axios({
-    url: `https://cors-anywhere.herokuapp.com/https://www.instagram.com/${username}/?__a=1`,
-    method: "get",
-    headers: {
-      "x-instagram-gis": signature,
-      "Content-Type": "application/json"
-    }
-  })
-    .then(response => {
-      console.log(response);
-      const data = response.data.graphql.user;
-      return data;
-      // this.setState({
-      //   username: data.biography,
-      //   full_name: data.full_name,
-      //   profile_pic_url: data.profile_pic_url,
-      //   follower_count: data.edge_follow.count,
-      //   following_count: data.edge_followed_by.count
-      // });
-    })
-    .catch(err => {
-      console.log(err);
-    });
-}
+// async function getRhxGis(username) {
+//   const resp = await axios.get("https://www.instagram.com/");
+//   const rx = '("rhx_gis"):"([a-zA-Z0-9]*)';
+//
+//   try {
+//   } catch (e) {
+//     console.log(e);
+//   }
+//   console.log(resp.data);
+//   const match = resp.data.match(rx); //=> object
+//   console.log(match[2]);
+//   console.log(generateSignature(match[2], `/${username}/`));
+//   const signature = generateSignature(match[2], `/${username}/`);
+//
+//   axios({
+//     url: `https://cors-anywhere.herokuapp.com/https://www.instagram.com/${username}/?__a=1`,
+//     method: "get",
+//     headers: {
+//       "x-instagram-gis": signature,
+//       "Content-Type": "application/json"
+//     }
+//   })
+//     .then(response => {
+//       console.log("resp" + response);
+//       // return response;
+//       // this.setState({
+//       //   username: data.biography,
+//       //   full_name: data.full_name,
+//       //   profile_pic_url: data.profile_pic_url,
+//       //   follower_count: data.edge_follow.count,
+//       //   following_count: data.edge_followed_by.count
+//       // });
+//     })
+//     .catch(err => {
+//       console.log(err);
+//     });
+//
+// }
 
 function generateSignature(rhxGis, queryVariables) {
   // generate signature

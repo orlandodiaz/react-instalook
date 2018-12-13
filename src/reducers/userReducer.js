@@ -27,11 +27,23 @@ const userReducer = (state = initState, action) => {
     // return sortBy(action.payload, obj => obj.user.follower_count).reverse();
     case "SORT_USERS":
       // let users;
-      let users = {
-        users: sortBy(action.payload, obj => obj.user.follower_count).reverse(),
-        sortby: action.sortby
-      };
-      return users;
+      if (action.sortby === "followers") {
+        return {
+          users: sortBy(
+            action.payload.users,
+            obj => obj.user.follower_count
+          ).reverse(),
+          sortby: action.sortby
+        };
+      } else {
+        return {
+          users: sortBy(action.payload.users, obj => obj.position),
+          sortby: action.sortby
+        };
+      }
+    // case "GET_USER_INFO":
+    //   users: sortBy(action.payload, obj => obj.position),
+    //   return action.userData;
 
     default:
       return state;
