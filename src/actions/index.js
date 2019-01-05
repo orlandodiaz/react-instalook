@@ -53,23 +53,41 @@ export function getUsers(username) {
   };
 }
 
-export function getUserInfo(username) {
-  return async (dispatch, getState) => {
+export function getRhxGis() {
+  return (dispatch, getState) => {
     // make async data here
     const state = getState();
 
-    const resp = await axios.get("https://www.instagram.com/");
-    const rx = '("rhx_gis"):"([a-zA-Z0-9]*)';
+    axios
+      .get(`https://www.instagram.com/`)
+      .then(response => {
+        const rx = '("rhx_gis"):"([a-zA-Z0-9]*)';
+        // console.log(resp.data);
+        const match = response.data.match(rx); //=> object
 
-    try {
-    } catch (e) {
-      console.log(e);
-    }
-    // console.log(resp.data);
-    const match = resp.data.match(rx); //=> object
-    // console.log(match[2]);
-    // console.log(generateSignature(match[2], `/${username}/`));
-    const signature = generateSignature(match[2], `/${username}/`);
+        const rhx_gis = match[2];
+        console.log("RHX_GIS" + match[2]);
+        // console.log(generateSignature(match[2], `/${username}/`));
+
+        dispatch({
+          type: "GET_RHX_GIS",
+          // payload: users
+          payload: {
+            rhx_gis: rhx_gis
+          }
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+}
+
+export function getUserInfo(username, callback) {
+  return (dispatch, getState) => {
+    const state = getState();
+
+    const signature = generateSignature(state.main.rhx_gis, `/${username}/`);
 
     axios({
       url: `https://cors-anywhere.herokuapp.com/https://www.instagram.com/${username}/?__a=1`,
@@ -82,15 +100,51 @@ export function getUserInfo(username) {
       .then(response => {
         // console.log("resp" + response);
         // alert(response);
+        // dispatch(callback);
+
+        // return new Promise((resolve, reject) => {
         dispatch({
           type: "GET_USER_INFO",
           // payload: users
+          rhx_gis: state.user.rhx_gis,
           user: response.data.graphql
         });
+        // });
+
+        // resolve();
+        // });
+
+        // dispatch({
+        //   type: "GET_USER_INFO",
+        //   // payload: users
+        //   rhx_gis: state.user.rhx_gis,
+        //   user: response.data.graphql
+        // });
+      })
+      .then(() => {
+        callback();
       })
       .catch(err => {
         console.log(err);
       });
+
+    // return Promise.resolve();
+  };
+}
+
+export function removeUserInfo(username) {
+  return (dispatch, getState) => {
+    const state = getState();
+
+    dispatch({
+      type: "REMOVE_USER_INFO",
+      // payload: users
+      rhx_gis: state.user.rhx_gis,
+      user: []
+    });
+
+    // callback();
+    return Promise.resolve();
   };
 }
 
@@ -102,16 +156,6 @@ function generateSignature(rhxGis, queryVariables) {
     .update(`${rhxGis}:${queryVariables}`, "utf8")
     .digest("hex");
 }
-
-// const showUserDialog = {
-//   type: "SHOW_USER_DIALOG",
-//   open: "true"
-// };
-//
-// const closeUserDialog = {
-//   type: "CLOSE_USER_DIALOG",
-//   open: "false"
-// };
 
 export function showUserDialog() {
   return dispatch => {

@@ -8,6 +8,7 @@ import MuiDialogActions from "@material-ui/core/DialogActions";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
+import CircularIndeterminate from "../Progress";
 
 const DialogTitle = withStyles(theme => ({
   root: {
@@ -73,34 +74,75 @@ class UserDialog extends React.Component {
   };
 
   render() {
-    return (
-      <div>
-        <Button size="small" color="primary" onClick={this.handleClickOpen}>
-          More info
-        </Button>
-        <Dialog
-          onClose={this.handleClose}
-          aria-labelledby="customized-dialog-title"
-          open={this.props.open}
-        >
-          <DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
-            {this.props.username}
-            {/*{this.props.biography ? this.props.biography : ""}*/}
-            {/*{this.props.user.biography  Biography: this.props.user.biography & ""}*/}
-          </DialogTitle>
-          <DialogContent>
-            <Typography gutterBottom>{this.props.fullname}</Typography>
-            {/*<Typography gutterBottom>{this.props.fullname}</Typography>*/}
-            <Typography gutterBottom>{this.props.biography}</Typography>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Save changes
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
-    );
+    if (this.props.username) {
+      return (
+        <div>
+          <Button size="small" color="primary" onClick={this.handleClickOpen}>
+            More info
+          </Button>
+          <Dialog
+            onClose={this.handleClose}
+            aria-labelledby="customized-dialog-title"
+            open={this.props.open}
+          >
+            <DialogTitle
+              id="customized-dialog-title"
+              onClose={this.handleClose}
+            >
+              {this.props.username}
+              {/*{this.props.biography ? this.props.biography : ""}*/}
+              {/*{this.props.user.biography  Biography: this.props.user.biography & ""}*/}
+            </DialogTitle>
+            <DialogContent>
+              <Typography gutterBottom>{this.props.fullname}</Typography>
+
+              {/*{this.props.biography ? (*/}
+              {/*<Typography gutterBottom>{this.props.fullname}</Typography>*/}
+              {/*) : (*/}
+              {/*<CircularIndeterminate />*/}
+              {/*)}*/}
+
+              {/*<Typography gutterBottom>{this.props.fullname}</Typography>*/}
+              <Typography gutterBottom>{this.props.biography}</Typography>
+
+              {/*{this.props.users.users.map(post => (*/}
+              {/*<img src={post.node.thumbnail_resources[0].src}  width="40" height="40"/>*/}
+              {/*)}*/}
+
+              {this.props.postarray.edges.map(post => (
+                <img
+                  src={post.node.thumbnail_resources[0].src}
+                  width="75"
+                  height="75"
+                />
+              ))}
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="primary">
+                Close
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          {/*<Button size="small" color="primary" onClick={this.handleClickOpen}>*/}
+          {/*More info*/}
+          {/*</Button>*/}
+          <Dialog
+            onClose={this.handleClose}
+            aria-labelledby="customized-dialog-title"
+            open={this.props.open}
+          >
+            <DialogContent>
+              <CircularIndeterminate />
+            </DialogContent>
+          </Dialog>
+        </div>
+      );
+    }
   }
 }
 
