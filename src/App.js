@@ -16,8 +16,14 @@ import { Router, Route, browserHistory, IndexRoute } from "react-router";
 import Root from "./components/Root";
 import SearchPage from "./components/SearchPage";
 import Privacypage from "./components/PrivacyPage";
+import { connect } from "react-redux";
+import * as actions from "./actions";
 
 class App extends Component {
+  componentDidMount() {
+    this.props.getRhxGis();
+  }
+
   render() {
     return (
       <Router history={browserHistory}>
@@ -31,4 +37,27 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  // console.log("State:");
+  // console.log(state);
+  return {
+    user: state.user,
+    ui: state.ui
+  };
+};
+
+// // shortcut so you dont do store.dispatch
+const mapDispatchToProps = dispatch => {
+  return {
+    getRhxGis: () => dispatch(actions.getRhxGis()),
+    getUserInfo: () => dispatch(actions.getUserInfo()),
+    showUserDialog: () => dispatch(actions.showUserDialog()),
+    closeUserDialog: () => dispatch(actions.closeUserDialog())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  // mapDispatchToProps
+  actions
+)(App);

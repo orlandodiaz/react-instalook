@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import * as actions from "../actions/index.js";
 import UserDialog from "../components/Dialogs/userDialog";
 import { getUserInfo } from "../actions";
+import ImageCard from "../components/ImageCard/ImageCard";
 
 class UserDialogContainer extends Component {
   doSomething = event => {
@@ -31,6 +32,8 @@ class UserDialogContainer extends Component {
           handleClickOpen={this.doSomething}
           handleClose={this.handleClose}
           open={this.props.ui.open}
+          user={this.props.user.user.full_name}
+          postarray={this.props.user.user.edge_owner_to_timeline_media}
         />
       </div>
     );

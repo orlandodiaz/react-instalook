@@ -5,6 +5,8 @@ import { Grid, Paper } from "@material-ui/core";
 import ImageCard from "../components/ImageCard/ImageCard";
 import UserDialogContainer from "./userDialogContainer";
 import * as actions from "../actions";
+import CircularIndeterminate from "../components/Progress";
+
 // import UserDialogfrom "../components/Dialogs/userDialog";
 // import
 // define component container here
@@ -13,11 +15,27 @@ class GridContainer extends Component {
   state = {
     open: false
   };
-  doSomething = username => {
+
+  handleLearnMore = username => {
     // alert("sdsd");
-    console.log("username:" + username);
+    // console.log("username:" + username);
+    // this.props.getUserInfo(username, () => {
+    //   this.props.showUserDialog();
+    // });
+
+    // Erase any previous user state here
+    this.props.removeUserInfo().then(this.props.showUserDialog());
     this.props.getUserInfo(username);
-    this.props.showUserDialog();
+
+    // this.props.getUserInfo(username).then(() => {
+    //   this.props.showUserDialog();
+    // });
+    // this.props.getUserInfo(username, () => {
+    //   alert("tes");
+    // });
+    // this.props.showUserDialog();
+
+    // this.props.showUserDialog();
     // this.setState({ open: true });
     // render(){<UserDialogContainer />);
   };
@@ -35,17 +53,21 @@ class GridContainer extends Component {
                   username={user.user.username}
                   fullname={user.user.full_name}
                   profilepic={user.user.profile_pic_url}
+                  // postarray={user.user.edge_owner_to_timeline_media.edges}
                   isVerified={user.user.is_verified}
                   profileUrl={`http://instagram.com/${user.user.username}`}
                   byLine={user.user.byline}
                   title="Hey my title"
                   description="Hey my description"
-                  onLearnMoreClick={() => this.doSomething(user.user.username)}
+                  onLearnMoreClick={() =>
+                    this.handleLearnMore(user.user.username)
+                  }
                 />
               </Grid>
             ))}
           </Grid>
           <UserDialogContainer />
+          {/*<CircularIndeterminate />*/}
         </div>
       );
   }
@@ -64,7 +86,8 @@ const mapStateToProps = state => {
 // shortcut so you dont do store.dispatch
 const mapDispatchToProps = dispatch => {
   return {
-    getUserInfo: () => dispatch(actions.getUserInfo()),
+    getUserInfo: callback => dispatch(actions.getUserInfo()),
+    removeUserInfo: callback => dispatch(actions.removeUserInfo()),
     users: () => dispatch(actions.getUsers()),
     showUserDialog: () => dispatch(actions.showUserDialog()),
     closeUserDialog: () => dispatch(actions.closeUserDialog())
