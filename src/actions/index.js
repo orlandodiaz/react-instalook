@@ -38,7 +38,6 @@ export function getUsers(username) {
           payload: {
             users: response.data.users,
             sortby: state.users.sortby,
-            fuck: "SDSD"
           }
         });
       })
